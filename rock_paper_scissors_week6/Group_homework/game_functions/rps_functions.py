@@ -33,6 +33,10 @@ def play_round():
     :return: str
     """
 
+    # Initialise round scores
+    user_round_score = 0
+    computer_round_score = 0
+
     # call the user_choice and computer_choice functions within the play_round function -- so that this happens for each round
     # had this outside of play_round before and it wasn't being considered when I ran the for loop to run 3 rounds of the game :(
     user = get_user_choice()
@@ -53,14 +57,40 @@ def play_round():
         (user == "Scissors" and computer == "Paper"):
 
         print("You win this round!\n")
+        user_round_score = 1
 
     # if none of the above conditions are met, then the computer wins
     else:
         print("You lose this round!\n")
+        computer_round_score = 1
 
-for item in range(3):
+    return user_round_score, computer_round_score
+
+
+
+# Play three rounds and accumulate the scores
+# to what extent do we keep code "client-side" vs in the package/modules?
+def rounds():
+    # Initialise overall scores
+    total_user_score = 0
+    total_computer_score = 0
+
+    for i in range(3):
+        user_round_score, computer_round_score = play_round()
+        total_user_score += user_round_score
+        total_computer_score += computer_round_score
+
+    print(f"The final score is:\nYou: {total_user_score}, Computer: {total_computer_score}")
+
+    if total_user_score > total_computer_score:
+        print("Congratulations, you win the game! 🤩")
+
+    elif total_user_score == total_computer_score:
+        print("It's a tie! Try again to beat the Computer 💪🏼")
+
+    else:
+        print("Computer won the game. Better luck next time! 😔")
+
+if __name__ == '__main__':
     play_round()
-
-
-
-
+    rounds()
