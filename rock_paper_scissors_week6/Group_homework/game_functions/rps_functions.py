@@ -1,12 +1,17 @@
+# import the random module to use the random.choice method
 import random
 
+# a function to get the computer's choice from a list
 def get_computer_choice():
     """
-    This function randomly selects a choice for the computer
-    :return: str.
+    This function randomly selects a choice for the computer from a  list
+    :return: str
     """
+    # returns a random choice from a list
     return random.choice(['Rock', 'Paper', 'Scissors'])
 
+
+# a function to get the user's choice from a dictionary
 def get_user_choice():
     """
     This function prompts the user to enter a choice of R, P, S and ensures the input is valid
@@ -23,22 +28,23 @@ def get_user_choice():
         print("Invalid choice; please enter R, P, or S.")
         user_input = input("Enter R for Rock, P for Paper, or S for Scissors: ").upper()
 
-    # this returns the full name of the user's choice, which is R, P or S
+    # returns the full name of the user's choice based on the dictionary
     return possible_choices[user_input]
 
+
+# a function to play one round of the game
 def play_round():
     """
     This function plays a single round of Rock, Paper, Scissors between a user and the computer
-    It gets both the user and the computer's choice, compares the choices to determine a winner, updating the scores accordingly and printing the result for each round
+    It gets both the user and the computer's choice, compares the choices to determine a winner, and prints the winner for each round
     :return: str
     """
 
-    # Initialise round scores
+    # set the score for each round to zero as a baseline
     user_round_score = 0
     computer_round_score = 0
 
-    # call the user_choice and computer_choice functions within the play_round function -- so that this happens for each round
-    # had this outside of play_round before and it wasn't being considered when I ran the for loop to run 3 rounds of the game :(
+    # call the user_choice and computer_choice functions using variables, so we can use them again
     user = get_user_choice()
     computer = get_computer_choice()
 
@@ -57,20 +63,26 @@ def play_round():
         (user == "Scissors" and computer == "Paper"):
 
         print("You win this round!\n")
+        # if the user wins this round, their score for the round is 1
         user_round_score = 1
 
     # if none of the above conditions are met, then the computer wins
     else:
         print("You lose this round!\n")
+        # if the computer wins this round, its score for the round is 1
         computer_round_score = 1
 
+    # return a round score for the user and for the computer
     return user_round_score, computer_round_score
 
 
 
-# Play three rounds and accumulate the scores
-# to what extent do we keep code "client-side" vs in the package/modules?
+# function to repeat the round 3 times and calculate total score
 def rounds():
+    """
+
+    :return:
+    """
     # Initialise overall scores
     total_user_score = 0
     total_computer_score = 0
@@ -90,6 +102,7 @@ def rounds():
 
     else:
         print("Computer won the game. Better luck next time! 😔")
+
 
 if __name__ == '__main__':
     play_round()
