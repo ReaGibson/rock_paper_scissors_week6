@@ -4,8 +4,8 @@ import random
 # a function to get the computer's choice from a list
 def get_computer_choice():
     """
-    This function randomly selects a choice for the computer from a  list
-    :return: str
+    This function randomly selects a choice for the computer from a  list.
+    :return: Rock, Paper or Scissors (str).
     """
     # returns a random choice from a list
     return random.choice(['Rock', 'Paper', 'Scissors'])
@@ -14,8 +14,8 @@ def get_computer_choice():
 # a function to get the user's choice from a dictionary
 def get_user_choice():
     """
-    This function prompts the user to enter a choice of R, P, S and ensures the input is valid
-    :return: str.
+    This function prompts the user to enter a choice of R, P, S and ensures the input is valid.
+    :return: Rock, Paper or Scissors (str).
     """
     # use a dictionary to list all possible choices, matching Rock, Paper, Scissors to R, P or S
     possible_choices = {"R": "Rock", "P": "Paper", "S": "Scissors"}
@@ -35,16 +35,16 @@ def get_user_choice():
 # a function to play one round of the game
 def play_round():
     """
-    This function plays a single round of Rock, Paper, Scissors between a user and the computer
-    It gets both the user and the computer's choice, compares the choices to determine a winner, and prints the winner for each round
-    :return: str
+    This function plays a single round of Rock, Paper, Scissors between a user and the computer.
+    It gets both the user and the computer's choice, compares the choices to determine a winner, and prints the winner for each round.
+    :return: The round's score for each of the user and computer (tuple).
     """
 
     # set the score for each round to zero as a baseline
     user_round_score = 0
     computer_round_score = 0
 
-    # call the user_choice and computer_choice functions using variables, so we can use them again
+    # call the user_choice and computer_choice functions to capture user and computer selection -- assign these to variables so we can reuse
     user = get_user_choice()
     computer = get_computer_choice()
 
@@ -52,7 +52,7 @@ def play_round():
     print(f"You chose: {user}")
     print(f"The computer chose: {computer}")
 
-    # use conditional logic to determine the winner of each round
+    # use conditional logic to determine the winner of a round
     # draw if the user and computer pick the same thing
     if user == computer:
         print("This round is a draw\n")
@@ -61,39 +61,45 @@ def play_round():
     elif (user == "Rock" and computer == "Scissors") or \
         (user == "Paper" and computer == "Rock") or \
         (user == "Scissors" and computer == "Paper"):
-
         print("You win this round!\n")
-        # if the user wins this round, their score for the round is 1
+
+        # if the user wins this round, their score for the round is set to 1
         user_round_score = 1
 
     # if none of the above conditions are met, then the computer wins
     else:
         print("You lose this round!\n")
-        # if the computer wins this round, its score for the round is 1
+
+        # if the computer wins this round, its score for the round is set to 1
         computer_round_score = 1
 
-    # return a round score for the user and for the computer
+    # return a tuple containing the score for the round (user, computer)
+    # this stores the result of the round and can be called later
     return user_round_score, computer_round_score
-
 
 
 # function to repeat the round 3 times and calculate total score
 def rounds():
     """
-
-    :return:
+    This function plays three rounds of the game, tallies the score for the user and computer at the end, and prints the final result.
+    :return: None.
     """
-    # Initialise overall scores
+
+    # set the total user and computer scores to zero
     total_user_score = 0
     total_computer_score = 0
 
+    # for loop runs three rounds; in each round it calls play_round (which itself returns two values: user's round score and computer's round score)
     for i in range(3):
         user_round_score, computer_round_score = play_round()
+        # here the round scores are added to the total score (which was set to zero)
         total_user_score += user_round_score
         total_computer_score += computer_round_score
 
+    # display the final score for the user and computer after three rounds
     print(f"The final score is:\nYou: {total_user_score}, Computer: {total_computer_score}")
 
+    # conditional logic to determine the overall winner of the game after three rounds
     if total_user_score > total_computer_score:
         print("Congratulations, you win the game! 🤩")
 
@@ -104,6 +110,10 @@ def rounds():
         print("Computer won the game. Better luck next time! 😔")
 
 
+# this block ensures that the code inside it only runs when the script is executed directly -- and not when it's imported as a module in another script
+# the code inside the block will only be run in another file if we import the module and call these specific functions
+# it also allows us to test specific functions within this file by running it as a script
 if __name__ == '__main__':
-    play_round()
-    rounds()
+    # testing that the get_user_choice function is working
+    user = get_user_choice()
+    print(user)
